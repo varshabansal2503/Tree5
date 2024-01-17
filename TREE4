@@ -1,0 +1,57 @@
+ANS:1--
+Recover Binary Search Tree.....
+class Solution {
+     TreeNode prev=null;
+        TreeNode first =null;
+        TreeNode second =null;
+      void inorder(TreeNode root)
+      {
+          if(root==null)
+          {
+              return;
+          }
+          inorder(root.left);
+          if(prev!=null && root.val<prev.val)
+          {
+              if(first==null)
+              {
+                  first=prev;
+                  second=root;
+              }
+             
+          }
+           prev=root;
+              inorder(root.right);
+      }
+    public void recoverTree(TreeNode root) {
+        if(root==null)
+            return ; 
+        inorder(root);
+        int temp=first.val;
+        first.val=second.val;
+        second.val=temp;
+
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:2---
+ Lowest Common Ancestor of a Binary Tree
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+         if(root==null || root==p || root==q){
+            return root;
+        }
+        TreeNode leftlca=lowestCommonAncestor(root.left,p,q);
+        TreeNode rightlca=lowestCommonAncestor(root.right,p,q);
+        if(rightlca==null){
+            return leftlca;
+        }
+        if(leftlca==null){
+            return rightlca;
+        }
+        return root;
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:3-----
+ Diameter of Binary Tree
