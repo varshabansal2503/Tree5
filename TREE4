@@ -55,3 +55,70 @@ class Solution {
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ANS:3-----
  Diameter of Binary Tree
+class Solution {
+     public int height(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int lh = height(root.left);
+        int rh = height(root.right);
+        return Math.max(lh , rh)+1;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+           if(root == null){
+            return 0;
+        }
+        int ld = diameterOfBinaryTree(root.left);
+        int lh = height(root.left);
+
+        int rd = diameterOfBinaryTree(root.right);
+        int rh = height(root.right);
+
+        int self_dia = lh+rh;
+
+        return Math.max(self_dia , Math.max(ld ,rd));
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:4--
+Given two Binary Search Trees. Find the nodes that are common in both of them, ie- find the intersection of the two BSTs.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:5--SAME TREE--------
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+     
+        if (p == null && q == null) {
+            return true;
+        }
+      
+        if (p == null || q == null || p.val != q.val) {
+            return false;
+        }
+     
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:6--
+Path to Given Node------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:7--
+VALIDATE BINARY SEARCH TREE
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+   Stack<TreeNode> stack = new Stack<>();
+   TreeNode pre = null;
+   while (root != null || !stack.isEmpty()) {
+      while (root != null) {
+         stack.push(root);
+         root = root.left;
+      }
+      root = stack.pop();
+      if(pre != null && root.val <= pre.val) return false;
+      pre = root;
+      root = root.right;
+   }
+   return true;
+    }
+}
